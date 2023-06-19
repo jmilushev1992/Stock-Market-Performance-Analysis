@@ -22,9 +22,7 @@ end_date = datetime.now()
 
 # Define the list of tickers for the companies you want to analyze:
 tickers = ['AAPL', 'MSFT', 'NFLX', 'GOOG']
-Retrieve stock data for the specified tickers and store it in a list:
-python
-Copy code
+# Retrieve stock data for the specified tickers and store it in a list:
 df_list = []
 for ticker in tickers:
     data = yf.download(ticker, start=start_date, end=end_date)
