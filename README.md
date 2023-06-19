@@ -13,9 +13,9 @@ pip install pandas yfinance plotly plotly_express
 
 # Import the required libraries:
 <br>import pandas as pd
-<br>import yfinance as yf<br />
-<br>from datetime import datetime<br />
-<br>import plotly.express as px<br />
+<br>import yfinance as yf
+<br>from datetime import datetime>
+<br>import plotly.express as px
 # Set the start and end dates for the analysis:
 start_date = datetime.now() - pd.DateOffset(months=3)
 end_date = datetime.now()
