@@ -12,7 +12,7 @@ plotly_express
 pip install pandas yfinance plotly plotly_express
 
 # Import the required libraries:
-<br>import pandas as pd<br />
+<br>import pandas as pd
 <br>import yfinance as yf<br />
 <br>from datetime import datetime<br />
 <br>import plotly.express as px<br />
