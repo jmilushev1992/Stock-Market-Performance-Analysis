@@ -50,7 +50,7 @@ fig.show()
 df['MA10'] = df.groupby('Ticker')['Close'].rolling(window=10).mean().reset_index(0, drop=True)
 df['MA20'] = df.groupby('Ticker')['Close'].rolling(window=20).mean().reset_index(0, drop=True)
 
-for ticker, group in df.groupby('Ticker'):
+<br>for ticker, group in df.groupby('Ticker'):
     print(f'Moving Averages for {ticker}')
     print(group[['MA10', 'MA20']])
     fig = px.line(group, x='Date', y=['Close', 'MA10', 'MA20'], 
