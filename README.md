@@ -1,8 +1,7 @@
 # Stock-Market-Performance-Analysis
 This project performs a stock market performance analysis for the last 3 months using Python. It retrieves stock data for selected companies, calculates moving averages, calculates volatility, and visualizes the data using Plotly.
 
-# Installation
-# To run this project, ensure that you have the following dependencies installed:
+# Installation- To run this project, ensure that you have the following dependencies installed:
 pandas
 yfinance
 datetime
