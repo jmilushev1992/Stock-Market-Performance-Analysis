@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Stock Market Performance Analysis</title>
+   
 </head>
 <body>
 
@@ -32,12 +32,11 @@
 
 <h2>Import Libraries</h2>
 
-<pre><code>&lt;script type="text/javascript"&gt;
+<pre><code>
     import pandas as pd
     import yfinance as yf
     from datetime import datetime
     import plotly.express as px
-&lt;/script&gt;
 </code></pre>
 
 <h2>Set Dates</h2>
@@ -71,8 +70,8 @@ fig = px.area(df, x='Date', y='Close', color='Ticker', facet_col='Ticker', label
 fig.show()
     </code></pre>
 
-    <h2>Calculate and Visualize Moving Averages</h2>
-    <pre><code class="language-python">
+<h2>Calculate and Visualize Moving Averages</h2>
+    <pre><code>
 df['MA10'] = df.groupby('Ticker')['Close'].rolling(window=10).mean().reset_index(0, drop=True)
 df['MA20'] = df.groupby('Ticker')['Close'].rolling(window=20).mean().reset_index(0, drop=True)
 
@@ -82,6 +81,26 @@ for ticker, group in df.groupby('Ticker'):
     fig = px.line(group, x='Date', y=['Close', 'MA10', 'MA20'], title=f"{ticker} Moving Averages")
     fig.show()
     </code></pre>
+
+<h2>Volatility:</h2>
+    <pre><code class="language-python">
+df['Volatility'] = df.groupby('Ticker')['Close'].pct_change().rolling(window=10).std().reset_index(0, drop=True)
+fig = px.line(df, x='Date', y='Volatility', color='Ticker', title='Volatility of All Companies')
+fig.show()
+</code></pre>
+
+<h2>Correlation Analysis:</h2>
+    <pre><code class="language-python">
+apple = df.loc[df['Ticker'] == 'AAPL', ['Date', 'Close']].rename(columns={'Close': 'AAPL'})
+microsoft = df.loc[df['Ticker'] == 'MSFT', ['Date', 'Close']].rename(columns={'Close': 'MSFT'})
+df_corr = pd.merge(apple, microsoft, on='Date')
+    </code></pre>
+
+<h2>Create a scatter plot to visualize the correlation</h2>
+<pre><code>
+fig = px.scatter(df_corr, x='AAPL', y='MSFT', trendline='ols', title='Correlation between Apple and Microsoft')
+fig.show()
+</code></pre>
 
 </body>
 </html>
