@@ -1,20 +1,87 @@
-<p dir="auto">Stock Market Performance Analysis This project performs a stock market performance analysis for the last 3 months using Python. It includes the following steps:</p>
-<p dir="auto">Retrieve stock data for selected companies Calculate moving averages Calculate volatility Visualize the data using Plotly Installation To run this project, ensure that you have the following dependencies installed:</p>
-<p dir="auto">pandas yfinance datetime plotly plotly_express You can install these dependencies using pip:</p>
-<p dir="auto">bash Copy code pip install pandas yfinance plotly plotly_express Import Libraries python Copy code import pandas as pd import yfinance as yf from datetime import datetime import plotly.express as px Set Dates Set the start and end dates for the analysis:</p>
-<p dir="auto">python Copy code start_date = datetime.now() - pd.DateOffset(months=3) end_date = datetime.now() Define Tickers Define the list of tickers for the companies you want to analyze:</p>
-<p dir="auto">python Copy code tickers = [&apos;AAPL&apos;, &apos;MSFT&apos;, &apos;NFLX&apos;, &apos;GOOG&apos;] Retrieve Stock Data Retrieve stock data for the specified tickers and store it in a list:</p>
-<p dir="auto">python Copy code df_list = [] for ticker in tickers: data = yf.download(ticker, start=start_date, end=end_date) df_list.append(data)</p>
-<p dir="auto">df = pd.concat(df_list, keys=tickers, names=[&apos;Ticker&apos;, &apos;Date&apos;]) Visualize Data Print the head of the dataframe:</p>
-<p dir="auto">python Copy code print(df.head()) Reset the index of the dataframe:</p>
-<p dir="auto">python Copy code df = df.reset_index() Visualize the stock market performance using line and area charts:</p>
-<p dir="auto">python Copy code fig = px.line(df, x=&apos;Date&apos;, y=&apos;Close&apos;, color=&apos;Ticker&apos;, title=&quot;Stock Market Performance for the Last 3 Months&quot;) fig.show()</p>
-<p dir="auto">fig = px.area(df, x=&apos;Date&apos;, y=&apos;Close&apos;, color=&apos;Ticker&apos;, facet_col=&apos;Ticker&apos;, labels={&apos;Date&apos;:&apos;Date&apos;, &apos;Close&apos;:&apos;Closing Price&apos;, &apos;Ticker&apos;:&apos;Company&apos;}, title=&apos;Stock Prices for Apple, Microsoft, Netflix, and Google&apos;) fig.show() Moving Averages Calculate and visualize the moving averages:</p>
-<p dir="auto">python Copy code df[&apos;MA10&apos;] = df.groupby(&apos;Ticker&apos;)[&apos;Close&apos;].rolling(window=10).mean().reset_index(0, drop=True) df[&apos;MA20&apos;] = df.groupby(&apos;Ticker&apos;)[&apos;Close&apos;].rolling(window=20).mean().reset_index(0, drop=True)</p>
-<p dir="auto">for ticker, group in df.groupby(&apos;Ticker&apos;): print(f&apos;Moving Averages for {ticker}&apos;) print(group[[&apos;MA10&apos;, &apos;MA20&apos;]]) fig = px.line(group, x=&apos;Date&apos;, y=[&apos;Close&apos;, &apos;MA10&apos;, &apos;MA20&apos;], title=f&quot;{ticker} Moving Averages&quot;) fig.show() Volatility Calculate and visualize the volatility:</p>
-<p dir="auto">python Copy code df[&apos;Volatility&apos;] = df.groupby(&apos;Ticker&apos;)[&apos;Close&apos;].pct_change().rolling(window=10).std().reset_index(0, drop=True) fig = px.line(df, x=&apos;Date&apos;, y=&apos;Volatility&apos;, color=&apos;Ticker&apos;, title=&apos;Volatility of All Companies&apos;) fig.show() Correlation Analysis Perform correlation analysis between two companies:</p>
-<p dir="auto">python Copy code apple = df.loc[df[&apos;Ticker&apos;] == &apos;AAPL&apos;, [&apos;Date&apos;, &apos;Close&apos;]].rename(columns={&apos;Close&apos;: &apos;AAPL&apos;}) microsoft = df.loc[df[&apos;Ticker&apos;] == &apos;MSFT&apos;, [&apos;Date&apos;, &apos;Close&apos;]].rename(columns={&apos;Close&apos;: &apos;MSFT&apos;}) df_corr = pd.merge(apple, microsoft, on=&apos;Date&apos;)</p>
-<h1 tabindex="-1" dir="auto"><a href="https://github.com/jmilushev1992/Stock-Market-Performance-Analysis/blob/main/README.md#create-a-scatter-plot-to-visualize-the-correlation"><svg version="1.1" width="16" height="16">
-            <path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path>
-        </svg></a>Create a scatter plot to visualize the correlation</h1>
-<p dir="auto">fig = px.scatter(df_corr, x=&apos;AAPL&apos;, y=&apos;MSFT&apos;, trendline=&apos;ols&apos;, title=&apos;Correlation between Apple and Microsoft&apos;) fig.show()</p>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stock Market Performance Analysis</title>
+</head>
+<body>
+
+<h1>Stock Market Performance Analysis</h1>
+<p>This project performs a stock market performance analysis for the last 3 months using Python. It includes the following steps:</p>
+
+<ul>
+    <li>Retrieve stock data for selected companies</li>
+    <li>Calculate moving averages</li>
+    <li>Calculate volatility</li>
+    <li>Visualize the data using Plotly</li>
+</ul>
+
+<h2>Installation</h2>
+<p>To run this project, ensure that you have the following dependencies installed:</p>
+
+<ul>
+    <li>pandas</li>
+    <li>yfinance</li>
+    <li>datetime</li>
+    <li>plotly</li>
+    <li>plotly_express</li>
+</ul>
+
+<p>You can install these dependencies using pip:</p>
+
+<pre><code>pip install pandas yfinance plotly plotly_express</code></pre>
+
+<h2>Import Libraries</h2>
+
+<pre><code>&lt;script type="text/javascript"&gt;
+    import pandas as pd
+    import yfinance as yf
+    from datetime import datetime
+    import plotly.express as px
+&lt;/script&gt;
+</code></pre>
+
+<h2>Set Dates</h2>
+
+<pre><code>start_date = datetime.now() - pd.DateOffset(months=3)
+end_date = datetime.now()
+</code></pre>
+
+<h2>Define Tickers</h2>
+
+<pre><code>tickers = ['AAPL', 'MSFT', 'NFLX', 'GOOG']
+</code></pre>
+
+<h2>Retrieve Stock Data and Visualize</h2>
+    <pre><code class="language-python">
+df_list = []
+for ticker in tickers:
+    data = yf.download(ticker, start=start_date, end=end_date)
+    df_list.append(data)
+
+df = pd.concat(df_list, keys=tickers, names=['Ticker', 'Date'])
+
+print(df.head())
+
+df = df.reset_index()
+
+fig = px.line(df, x='Date', y='Close', color='Ticker', title="Stock Market Performance for the Last 3 Months")
+fig.show()
+
+fig = px.area(df, x='Date', y='Close', color='Ticker', facet_col='Ticker', labels={'Date':'Date', 'Close':'Closing Price', 'Ticker':'Company'}, title='Stock Prices for Apple, Microsoft, Netflix, and Google')
+fig.show()
+    </code></pre>
+
+    <h2>Calculate and Visualize Moving Averages</h2>
+    <pre><code class="language-python">
+df['MA10'] = df.groupby('Ticker')['Close'].rolling(window=10).mean().reset_index(0, drop=True)
+df['MA20'] = df.groupby('Ticker')['Close'].rolling(window=20).mean().reset_index(0, drop=True)
+
+for ticker, group in df.groupby('Ticker'):
+    print(f'Moving Averages for {ticker}')
+    print(group[['MA10', 'MA20']])
+    fig = px.line(group, x='Date', y=['Close', 'MA10', 'MA20'], title=f"{ticker} Moving Averages")
+    fig.show()
+    </code></pre>
+
+</body>
+</html>
