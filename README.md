@@ -82,14 +82,14 @@ for ticker, group in df.groupby('Ticker'):
     fig.show()
     </code></pre>
 
-<h2>Volatility:</h2>
+<h2>Volatility</h2>
     <pre><code class="language-python">
 df['Volatility'] = df.groupby('Ticker')['Close'].pct_change().rolling(window=10).std().reset_index(0, drop=True)
 fig = px.line(df, x='Date', y='Volatility', color='Ticker', title='Volatility of All Companies')
 fig.show()
 </code></pre>
 
-<h2>Correlation Analysis:</h2>
+<h2>Correlation Analysis</h2>
     <pre><code class="language-python">
 apple = df.loc[df['Ticker'] == 'AAPL', ['Date', 'Close']].rename(columns={'Close': 'AAPL'})
 microsoft = df.loc[df['Ticker'] == 'MSFT', ['Date', 'Close']].rename(columns={'Close': 'MSFT'})
