@@ -1,38 +1,52 @@
-# Stock Market Performance Analysis
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stock Market Performance Analysis</title>
+</head>
+<body>
 
-This project performs a stock market performance analysis for the last 3 months using Python. It retrieves stock data for selected companies, calculates moving averages, calculates volatility, and visualizes the data using Plotly.
+<h1>Stock Market Performance Analysis</h1>
+<p>This project performs a stock market performance analysis for the last 3 months using Python. It includes the following steps:</p>
 
-## Installation
+<ul>
+    <li>Retrieve stock data for selected companies</li>
+    <li>Calculate moving averages</li>
+    <li>Calculate volatility</li>
+    <li>Visualize the data using Plotly</li>
+</ul>
 
-To run this project, ensure that you have the following dependencies installed:
+<h2>Installation</h2>
+<p>To run this project, ensure that you have the following dependencies installed:</p>
 
-- pandas
-- yfinance
-- datetime
-- plotly
-- plotly_express
+<ul>
+    <li>pandas</li>
+    <li>yfinance</li>
+    <li>datetime</li>
+    <li>plotly</li>
+    <li>plotly_express</li>
+</ul>
 
-You can install these dependencies using pip:
+<p>You can install these dependencies using pip:</p>
 
-```bash
-pip install pandas yfinance plotly plotly_express
-Import the Required Libraries
-python
-Copy code
-import pandas as pd
-import yfinance as yf
-from datetime import datetime
-import plotly.express as px
-Set Dates
-Set the start and end dates for the analysis:
+<pre><code>pip install pandas yfinance plotly plotly_express</code></pre>
 
-python
-Copy code
-start_date = datetime.now() - pd.DateOffset(months=3)
+<h2>Import Libraries</h2>
+
+<pre><code>&lt;script type="text/javascript"&gt;
+    import pandas as pd
+    import yfinance as yf
+    from datetime import datetime
+    import plotly.express as px
+&lt;/script&gt;
+</code></pre>
+
+<h2>Set Dates</h2>
+
+<pre><code>start_date = datetime.now() - pd.DateOffset(months=3)
 end_date = datetime.now()
-Define Tickers
-Define the list of tickers for the companies you want to analyze:
+</code></pre>
 
-python
-Copy code
-tickers = ['AAPL', 'MSFT', 'NFLX', 'GOOG']
+<h2>Define Tickers</h2>
+
+<pre><code>tickers = ['AAPL', 'MSFT', 'NFLX', 'GOOG']
+</code></pre>
